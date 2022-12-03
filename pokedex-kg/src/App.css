@@ -7,3 +7,23 @@
   margin: 16px;
   background: transparent;
 }
+
+.Legend-colorBox {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.Legend-colorLine {
+  width: 0.5rem;
+  height: 0.2rem;
+  display: inline-block;
+  margin-bottom: 0.2rem;
+}
+
+.Legend-item {
+  text-align: left;
+  margin-left: 20px;
+  font-size: small;
+}

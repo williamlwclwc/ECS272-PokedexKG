@@ -11,13 +11,13 @@ function MainBoard() {
         <div>
             <Card style={{maxHeight: '88vh'}}>
                 <Row>
-                    <Col flex={4}>
+                    <Col flex={4} id='main' style={{width: '60%'}}>
                         <selectedItemContext.Provider value={{selectedItem, setSelectedItem}}>
                             <NodeLink />
                         </selectedItemContext.Provider>
                     </Col>
                     <Divider style={{height: '84vh'}} type="vertical"></Divider>
-                    <Col flex={1} style={{width: '20%'}}>
+                    <Col flex={1} style={{width: '25%'}}>
                         <selectedItemContext.Provider value={{selectedItem, setSelectedItem}}>
                             <Details />
                         </selectedItemContext.Provider>
