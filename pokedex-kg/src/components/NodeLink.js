@@ -28,10 +28,13 @@ function NodeLink() {
             .force("link", d3.forceLink().id(d => d.id))
     };
     function drawDiagramCanvas(id, data, height, width) {
-        const nodeRadius = 3;
+        let nodeRadius = 3;
+        const nodeRadiusDefault = 3;
         const colorNode = d3.schemeCategory10.slice(0, 5);
         const colorLink = d3.schemeCategory10.slice(5, 10);
         let expandedNodes = [];
+        let nodeSizePokemon = '1';
+        let nodeSizeOther = '1';
 
         const canvas = d3.select(id).append('canvas')
         .attr('width', width)
@@ -78,7 +81,7 @@ function NodeLink() {
         function dragSubject(e) {
             const x = transform.invertX(e.x),
                 y = transform.invertY(e.y);
-            const node = findNode(nodes, x, y, nodeRadius);
+            const node = findNode(nodes, x, y, 5);
             if (node) {
                 node.x =  transform.applyX(node.x);
                 node.y = transform.applyY(node.y);
@@ -138,18 +141,88 @@ function NodeLink() {
             });
         })
 
+        let minTotalStats = 720;
+        let maxTotalStats = 0;
+        // max(atk, sp_atk) + speed
+        let minAtkStats = 720;
+        let maxAtkStats = 0;
+        // hp + def + sp_def
+        let minTankStats = 720;
+        let maxTankStats = 0;
+        nodes.forEach(function(d) {
+            d.degree = 0;
+            if (d.group === 0) {
+                d.totalStats = parseInt(d.attr.hp) + parseInt(d.attr.attack) + parseInt(d.attr.defense) + parseInt(d.attr.sp_attack) + parseInt(d.attr.sp_defense) + parseInt(d.attr.speed);
+                d.atkStats = Math.max(parseInt(d.attr.attack), parseInt(d.attr.sp_attack)) + parseInt(d.attr.speed);
+                d.tankStats = parseInt(d.attr.hp) + parseInt(d.attr.defense) + parseInt(d.attr.sp_defense);
+                if (d.totalStats > maxTotalStats) {
+                    maxTotalStats = d.totalStats;
+                }
+                if (d.totalStats < minTotalStats) {
+                    minTotalStats = d.totalStats;
+                }
+                if (d.atkStats > maxAtkStats) {
+                    maxAtkStats = d.atkStats;
+                }
+                if (d.atkStats < minAtkStats) {
+                    minAtkStats = d.atkStats;
+                }
+                if (d.tankStats > maxTankStats) {
+                    maxTankStats = d.tankStats;
+                }
+                if (d.tankStats < minTankStats) {
+                    minTankStats = d.tankStats;
+                }
+            }
+        });
+        edges.forEach(function(d) {
+            d.source.degree += 1;
+            d.target.degree += 1;
+        });
+        let minDegree = d3.min(
+            Object.values(nodes), function(d) {
+                return d.degree;
+            })
+        
+        let maxDegree = d3.max(
+            Object.values(nodes), function(d) { 
+                return d.degree;
+            })
+        let nodescale = d3.scaleSqrt()
+        .domain( [minDegree, maxDegree] )
+        .range( [2, 10] );
+        let nodescaleStats = d3.scaleSqrt()
+        .domain( [minTotalStats, maxTotalStats] )
+        .range( [2, 10] );
+        let nodescaleAtkStats = d3.scaleSqrt()
+        .domain( [minAtkStats, maxAtkStats] )
+        .range( [2, 10] );
+        let nodescaleTankStats = d3.scaleSqrt()
+        .domain( [minTankStats, maxTankStats] )
+        .range( [2, 10] );
+        
+        // customization
         d3.select("#slider-charge").on("input", () => {
             let d = d3.select("#slider-charge").node().value;
             simulation.force("charge").strength(d);
             simulation.alphaTarget(0.3).restart();
-        })
-
+        });
         d3.select("#slider-dis").on("input", () => {
             let d = d3.select("#slider-dis").node().value;
             simulation.force("link").distance(d);
             simulation.alphaTarget(0.3).restart();
-        })
+        });
+        d3.select('#nsize-p').on('change', function() {
+            nodeSizePokemon = d3.select(this).property('value');
+            simulationUpdate();
+        });
+        d3.select('#nsize-o').on('change', function() {
+            nodeSizeOther = d3.select(this).property('value');
+            simulationUpdate();
+        });
 
+
+        // update render
         function simulationUpdate() {
             let opacityNodes = [];
             ctx.save();
@@ -172,6 +245,28 @@ function NodeLink() {
             // Draw nodes
             nodes.forEach(function(d, i) {
                 ctx.beginPath();
+                // customize node size
+                if (d.group === 0) {
+                    // Pokemon
+                    if (nodeSizePokemon === '0') {
+                        nodeRadius = nodescale(d.degree);
+                    } else if (nodeSizePokemon === '1') {
+                        nodeRadius = nodeRadiusDefault;
+                    } else if (nodeSizePokemon === '2') {
+                        nodeRadius = nodescaleStats(d.totalStats);
+                    } else if (nodeSizePokemon === '3') {
+                        nodeRadius = nodescaleAtkStats(d.atkStats);
+                    } else {
+                        nodeRadius = nodescaleTankStats(d.tankStats);
+                    }
+                } else {
+                    // Other
+                    if (nodeSizeOther === '0') {
+                        nodeRadius = nodescale(d.degree);
+                    } else {
+                        nodeRadius = nodeRadiusDefault;
+                    }
+                }
                 // Node fill
                 if (opacityNodes.length === 0 || opacityNodes.includes(i)) {
                     ctx.globalAlpha = 1;

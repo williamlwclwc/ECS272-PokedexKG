@@ -8,7 +8,7 @@ import {
   QuestionCircleOutlined,
   TeamOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Image, Divider, Input, Col, Row, Slider } from 'antd';
+import { Layout, Menu, Image, Divider, Input } from 'antd';
 import pokeball from './assets/pokeball.png';
 import MainBoard from './components/MainBoard';
 const { Content, Footer, Sider } = Layout;
@@ -38,7 +38,7 @@ function App() {
   const colorLink = d3.scaleOrdinal(d3.schemeCategory10.slice(5, 10));
   const arrayNode = ['Pokemon', 'Moves', 'Type', 'Ability', 'Egg Group'];
   const arrayLink = [
-    'Pokemon)Master(move)', 
+    '(Pokemon)Master(move)', 
     '(Pokemon)Has(type)',
     '(Move)Has(type)',
     '(Pokemon)Has(Ability)',
@@ -115,6 +115,20 @@ function App() {
                 <div>
                   <input id="slider-dis" type="range" min="0" max="100" defaultValue="30" />
                 </div>
+                &nbsp;
+                <div style={{fontSize: 'small'}}>Node Size(Pokemon) based on:</div>
+                <select id="nsize-p" defaultValue="1">
+                <option value="0">Degree</option>
+                <option value="1">Uniformed</option> 
+                <option value="2">Total Stats</option>
+                <option value="3">Attack Stats</option>
+                <option value="4">Tank Stats</option>
+                </select>
+                <div style={{fontSize: 'small'}}>Node Size(Other) based on:</div>
+                <select id="nsize-o" defaultValue="1">
+                <option value="0">Degree</option>
+                <option value="1">Uniformed</option> 
+                </select>
               </div>
             </div>
           }
