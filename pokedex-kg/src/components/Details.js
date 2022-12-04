@@ -5,7 +5,7 @@ import { Empty } from "antd";
 function Details() {
     // eslint-disable-next-line
     const {selectedItem, setSelectedItem} = useContext(selectedItemContext);
-    console.log(selectedItem);
+    // console.log(selectedItem);
     if (Object.keys(selectedItem).length === 0)
         return (
             <Empty description={
