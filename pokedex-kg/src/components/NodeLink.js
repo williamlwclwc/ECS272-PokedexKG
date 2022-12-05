@@ -97,12 +97,12 @@ function NodeLink() {
                         expandedNodes = [...expandedNodes, node.id];
                     }
                 } 
-                    // click show details
-                    dblclickTimer = setTimeout(function() {
-                        dblclickTimer = false;
-                        setSelectedItem(node);
-                    }, 250);
-                
+
+                  // click show details
+                  dblclickTimer = setTimeout(function() {
+                      dblclickTimer = false;
+                      setSelectedItem(node);
+                  }, 250);
             }
             // else: No node selected, drag container
             return node;
