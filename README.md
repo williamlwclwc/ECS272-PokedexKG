@@ -12,3 +12,4 @@
 * `npm start`: to start the project locally
 * We have a online demo at [Vercel](https://ecs272-final-pokedex-kg.vercel.app/) as well
 * A preview screenshot of what our project looks like: ![Preview](Preview.png)
+* If you cannot get the similar effect of the preview screenshot, try to zoom in/out, we tested it on Chrome 100% Zoom and MBP14 with the default display setting.
