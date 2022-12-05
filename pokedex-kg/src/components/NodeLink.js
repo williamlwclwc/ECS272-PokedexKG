@@ -2,6 +2,7 @@ import data from "../assets/pokedex.json";
 import * as d3 from "d3";
 import { useContext, useEffect } from 'react';
 import { selectedItemContext } from "./MainBoard";
+import { message } from 'antd';
 
 function NodeLink() {
     // eslint-disable-next-line
@@ -98,11 +99,11 @@ function NodeLink() {
                     }
                 } 
 
-                  // click show details
-                  dblclickTimer = setTimeout(function() {
-                      dblclickTimer = false;
-                      setSelectedItem(node);
-                  }, 250);
+                // click show details
+                dblclickTimer = setTimeout(function() {
+                    dblclickTimer = false;
+                    setSelectedItem(node);
+                }, 250);
             }
             // else: No node selected, drag container
             return node;
@@ -131,14 +132,21 @@ function NodeLink() {
 
         d3.select(".ant-input-search-button").on("click", () => {
             let newName = d3.select("#search").node().value;
+            let flag = 0;
             nodes.forEach(function(d, i) {
                 if (newName.toLowerCase() === d.attr.name) {
                     if (!expandedNodes.includes(i)) {
                         expandedNodes = [...expandedNodes, i];
                     }
                     setSelectedItem(d);
+                    flag = 1;
                 }
             });
+            if (flag === 1) {
+                message.success("Search Successful");
+            } else {
+                message.error("Key Word Not Found");
+            }
             simulationUpdate();
         })
 
