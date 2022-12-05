@@ -8,9 +8,10 @@ import {
   QuestionCircleOutlined,
   TeamOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Image, Divider, Input } from 'antd';
+import { Layout, Menu, Image, Divider, Input, Modal, Tour } from 'antd';
 import pokeball from './assets/pokeball.png';
 import MainBoard from './components/MainBoard';
+import Container from './components/Container';
 const { Content, Footer, Sider } = Layout;
 const { Search } = Input;
 
@@ -26,6 +27,7 @@ export const configContext = createContext();
 
 function App() {
   const [config, setConfig] = useState({'search': '', 'config': {}});
+  const [open, setOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState(['1']);
   const items = [
@@ -44,23 +46,76 @@ function App() {
     '(Pokemon)Has(Ability)',
     '(Pokemon)-(Egg Group)'
   ];
+  const [isFirstTime, setIsFirstTime] = useState(true);
+  const [startPage, setStartPage] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   function onClickMenu(item) {
     const key = item.key;
     if (key === '1') {
       setSelectedKeys(['1']);
     } else if (key === '2') {
-      setSelectedKeys(['2']);
+      if (isFirstTime){
+        showModal()
+        setIsFirstTime(false);
+      }
+      else{
+        setSelectedKeys(['2']);
+      }
+    } else if (key === '3') {
+      setOpen(true)
     } else if (key === '4') {
-  
-    } else if (key === '5') {
   
     }
   };
 
+  function showModal(){
+    setIsModalOpen(true);
+  }
+
+  function handleOk(){
+    setStartPage(5);
+    setIsModalOpen(false);
+    setSelectedKeys(['2']);
+  }
+
+  function handleCancel(){
+    setIsModalOpen(false);
+    setSelectedKeys(['2']);
+  }
+
   function onSearch() {
     
   }
+
+  function updateStartPage(page) {
+    setStartPage(page)
+  }
+
+  const steps = [
+    {
+      title: 'Menu',
+      description: 'You can choose to either freely explore in \'Explore Stories\' or watch stories narrated by us in \'Storytelling\'.',
+      target: null,
+    },
+    {
+      title: 'Node link (1)',
+      description: 'Nodes are separeted in 5 groups (more information in Legend). You can customize different parameters on the left side.',
+      target: null,
+    },
+    {
+      title: 'Node link (2)',
+      description: 'Click a node to see details on the right side. Double click a node to link all the relative nodes.',
+      target: null,
+    },
+    {
+      title: 'Search',
+      description: 'You can search a certain node with its name. For example, search \'pikachu\'.',
+      target: null,
+    },
+  ];
+  
 
   return (
     <div className="App">
@@ -82,7 +137,7 @@ function App() {
               collapsed ? null : <div style={{display: 'inline-block'}}>Pokedex-KG</div>
             }
           </div>
-          <Menu theme="light" defaultSelectedKeys={['1']} selectedKeys={selectedKeys} mode="inline" items={items} onClick={onClickMenu} />
+          <Menu theme="light" defaultSelectedKeys={['1']} selectedKeys={selectedKeys} mode="inline" items={items} onClick={onClickMenu}/>
           {
             collapsed ? null : <div>
               <Divider plain style={{margin: 'auto', minWidth: '80%', width: '80%'}}>Legend</Divider>
@@ -103,7 +158,7 @@ function App() {
               </div>
               &nbsp;
               <Divider plain style={{margin: 'auto', minWidth: '80%', width: '80%'}}>Search</Divider>
-              <Search id='search' placeholder="Search node" onSearch={onSearch} enterButton style={{width: '90%'}} />
+              <Search id='search' placeholder="Search node" onSearch={onSearch} enterButton style={{width: '90%'}}/>
               <Divider plain style={{margin: 'auto', minWidth: '80%', width: '80%'}}>Customization</Divider>
               &nbsp;
               <div>
@@ -146,10 +201,17 @@ function App() {
                 minHeight: 360,
               }}
             >
+              {
+              selectedKeys[0] === '1'?
               <configContext.Provider value={{config, setConfig}}>
-                <MainBoard />
+                <MainBoard/>
               </configContext.Provider>
+              : null
+              }
+              {selectedKeys[0] === '2'? <Container startPage={startPage} updateStartPage={updateStartPage}/> : null}
             </div>
+            <Modal title="Skip the part for Newbees?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}/>
+            <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
           </Content>
           <Footer
             style={{

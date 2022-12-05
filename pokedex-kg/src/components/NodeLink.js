@@ -96,13 +96,13 @@ function NodeLink() {
                     } else {
                         expandedNodes = [...expandedNodes, node.id];
                     }
-                } else {
+                } 
                     // click show details
                     dblclickTimer = setTimeout(function() {
                         dblclickTimer = false;
                         setSelectedItem(node);
                     }, 250);
-                }
+                
             }
             // else: No node selected, drag container
             return node;
@@ -132,7 +132,7 @@ function NodeLink() {
         d3.select(".ant-input-search-button").on("click", () => {
             let newName = d3.select("#search").node().value;
             nodes.forEach(function(d, i) {
-                if (newName === d.attr.name) {
+                if (newName.toLowerCase() === d.attr.name) {
                     if (!expandedNodes.includes(i)) {
                         expandedNodes = [...expandedNodes, i];
                     }
