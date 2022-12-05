@@ -8,6 +8,7 @@ import {
   QuestionCircleOutlined,
   TeamOutlined,
 } from '@ant-design/icons';
+
 import { Layout, Menu, Image, Divider, Input, Modal, Tour } from 'antd';
 import pokeball from './assets/pokeball.png';
 import MainBoard from './components/MainBoard';
@@ -27,7 +28,9 @@ export const configContext = createContext();
 
 function App() {
   const [config, setConfig] = useState({'search': '', 'config': {}});
+
   const [open, setOpen] = useState(false);
+
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState(['1']);
   const items = [
@@ -56,6 +59,7 @@ function App() {
     if (key === '1') {
       setSelectedKeys(['1']);
     } else if (key === '2') {
+
       if (isFirstTime){
         showModal()
         setIsFirstTime(false);
@@ -69,6 +73,7 @@ function App() {
   
     }
   };
+
 
   function showModal(){
     setIsModalOpen(true);
@@ -116,6 +121,9 @@ function App() {
     },
   ];
   
+  function onSearch() {
+    
+  }
 
   return (
     <div className="App">
@@ -201,6 +209,7 @@ function App() {
                 minHeight: 360,
               }}
             >
+
               {
               selectedKeys[0] === '1'?
               <configContext.Provider value={{config, setConfig}}>
