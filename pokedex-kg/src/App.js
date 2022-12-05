@@ -6,7 +6,6 @@ import {
   CompassOutlined,
   DeploymentUnitOutlined,
   QuestionCircleOutlined,
-  TeamOutlined,
 } from '@ant-design/icons';
 
 import { Layout, Menu, Image, Divider, Input, Modal, Tour } from 'antd';
@@ -37,7 +36,6 @@ function App() {
     getItem('Explore Stories', '1', <DeploymentUnitOutlined />),
     getItem('Storytelling', '2', <CompassOutlined />),
     getItem('Help', '3', <QuestionCircleOutlined />),
-    getItem('About', '4', <TeamOutlined />)
   ];
   const colorNode = d3.scaleOrdinal(d3.schemeCategory10.slice(0, 5));
   const colorLink = d3.scaleOrdinal(d3.schemeCategory10.slice(5, 10));
@@ -69,8 +67,6 @@ function App() {
       }
     } else if (key === '3') {
       setOpen(true)
-    } else if (key === '4') {
-  
     }
   };
 
@@ -105,13 +101,13 @@ function App() {
       target: null,
     },
     {
-      title: 'Node link (1)',
+      title: 'Left Panel',
       description: 'Nodes are separeted in 5 groups (more information in Legend). You can customize different parameters on the left side.',
       target: null,
     },
     {
-      title: 'Node link (2)',
-      description: 'Click a node to see details on the right side. Double click a node to link all the relative nodes.',
+      title: 'Node-link Interactions',
+      description: 'Scroll to zoom. Click, hold and move to pan. Click a node to see details on the right side. Double click a node to expand all the relative nodes and links.',
       target: null,
     },
     {
@@ -121,10 +117,6 @@ function App() {
     },
   ];
   
-  function onSearch() {
-    
-  }
-
   return (
     <div className="App">
       <Layout
@@ -219,7 +211,7 @@ function App() {
               }
               {selectedKeys[0] === '2'? <Container startPage={startPage} updateStartPage={updateStartPage}/> : null}
             </div>
-            <Modal title="Skip the part for Newbees?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}/>
+            <Modal title="Skip the part for Newbees?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText='Yes' cancelText='No'/>
             <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
           </Content>
           <Footer

@@ -1,4 +1,4 @@
-import { Divider, Card, Row, Col } from "antd";
+import { Card, Row, Col } from "antd";
 import NodeLink from "./NodeLink";
 import Details from "./Details";
 import { createContext, useState } from 'react';
@@ -11,12 +11,11 @@ function MainBoard() {
         <div>
             <Card style={{maxHeight: '88vh'}}>
                 <Row>
-                    <Col flex={4} id='main' style={{width: '60%'}}>
+                    <Col flex={4} id='main' style={{width: '60%', height: '86vh'}}>
                         <selectedItemContext.Provider value={{selectedItem, setSelectedItem}}>
                             <NodeLink />
                         </selectedItemContext.Provider>
                     </Col>
-                    <Divider style={{height: '84vh'}} type="vertical"></Divider>
                     <Col flex={1} style={{width: '25%'}}>
                         <selectedItemContext.Provider value={{selectedItem, setSelectedItem}}>
                             <Details />

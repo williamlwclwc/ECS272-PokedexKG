@@ -48,6 +48,8 @@ export default class Banner extends Component {
               <RadarPlot {...this.state}/>
               <span style={{fontFamily: "Georgia"}}>Total: {this.state.totalStats}</span>
             </div>
+            <br />
+            <Button type="link" href={"https://bulbapedia.bulbagarden.net/wiki/" + this.state.attr.name.split("-").map(firstUpperCase).join("_") + '_(Pokémon)'} target="_blank">More on Pokemon Wiki</Button>
           </Card>
           : null
         }
@@ -68,7 +70,7 @@ export default class Banner extends Component {
             <span style={{fontFamily: "Georgia"}}>{this.state.attr.power}</span><br />
             <span style={{fontWeight:"bold", fontSize:16}}>PP</span><br/>
             <span style={{fontFamily: "Georgia"}}>{this.state.attr.pp}</span><br />
-            <Button type="primary" href={"https://bulbapedia.bulbagarden.net/wiki/" + this.state.attr.name.split("-").map(firstUpperCase).join("_") + '_(move)'}>Go to Pokemon Wiki</Button>
+            <Button type="link" href={"https://bulbapedia.bulbagarden.net/wiki/" + this.state.attr.name.split("-").map(firstUpperCase).join("_") + '_(move)'} target="_blank">More on Pokemon Wiki</Button>
           </Card>
           :null
         }
@@ -81,7 +83,7 @@ export default class Banner extends Component {
           >
             <span style={{fontWeight:"bold", fontSize:16}}>NAME</span><br/>
             <span style={{textTransform: 'capitalize', fontFamily: "Georgia"}}>{this.state.attr.name}</span><br/>
-            <Button type="primary" href={"https://bulbapedia.bulbagarden.net/wiki/" + this.state.attr.name.split("-").map(firstUpperCase).join("_") + '_(type)'}>Go to Pokemon Wiki</Button>
+            <Button type="link" href={"https://bulbapedia.bulbagarden.net/wiki/" + this.state.attr.name.split("-").map(firstUpperCase).join("_") + '_(type)'} target="_blank">More on Pokemon Wiki</Button>
           </Card>
           :null
         }
@@ -94,7 +96,7 @@ export default class Banner extends Component {
           >
             <span style={{fontWeight:"bold", fontSize:16}}>NAME</span><br/>
             <span style={{textTransform: 'capitalize', fontFamily: "Georgia"}}>{this.state.attr.name}</span><br/>
-            <Button type="primary" href={"https://bulbapedia.bulbagarden.net/wiki/" + this.state.attr.name.split("-").map(firstUpperCase).join("_") + '_(Ability)'}>Go to Pokemon Wiki</Button>
+            <Button type="link" href={"https://bulbapedia.bulbagarden.net/wiki/" + this.state.attr.name.split("-").map(firstUpperCase).join("_") + '_(Ability)'} target="_blank">More on Pokemon Wiki</Button>
           </Card>
           :null
         }
@@ -107,7 +109,7 @@ export default class Banner extends Component {
           >
             <span style={{fontWeight:"bold", fontSize:16}}>NAME</span><br/>
             <span style={{textTransform: 'capitalize', fontFamily: "Georgia"}}>{this.state.attr.name}</span><br/>
-            <Button type="primary" href={"https://bulbapedia.bulbagarden.net/wiki/" + this.state.attr.name.split("-").map(firstUpperCase).join("_") + '_(Egg_Group)'}>Go to Pokemon Wiki</Button>
+            <Button type="link" href={"https://bulbapedia.bulbagarden.net/wiki/" + this.state.attr.name.split("-").map(firstUpperCase).join("_") + '_(Egg_Group)'} target="_blank">More on Pokemon Wiki</Button>
           </Card>
           :null
         }

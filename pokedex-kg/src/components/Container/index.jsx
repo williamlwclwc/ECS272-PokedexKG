@@ -59,7 +59,7 @@ export default class Container extends Component {
           </div>
         </div>
         <div style={{display:this.state.curPage === 3? 'flex': 'none', flexDirection: 'column'}} className="page">
-         <h1 className='pagetitle'>Gameplay</h1>
+        <h1 className='pagetitle'>Gameplay</h1>
           <div className='pagecontent'>
             <div className='pagetext'>
               <span>In Pokémon games, players are designated as Pokémon Trainers and have three general goals: to complete the regional Pokédex by collecting all of the available Pokémon species found in the fictional region where a game takes place, to complete the national Pokédex by transferring Pokémon from other regions, and to train a team of powerful Pokémon from those they have caught to compete against teams owned by other Trainers so they may eventually win the Pokémon League and become the regional Champion. These themes of collecting, training, and battling are present in almost every version of the Pokémon franchise, including the video games, the anime and manga series, and the Pokémon Trading Card Game (also known as TCG).</span>
@@ -110,8 +110,8 @@ export default class Container extends Component {
               <span>However, some Pokémons don't follow this rule. For example, Eevee is a Normal type Pokémon, but it can evolve into one of eight different Pokémons, none of them retain Normal type. We can see the nodes of Eevee and Eevee family(イーブイズ) are relatively far from each other.</span>
             </div>
             <div className='img'>
-              <Image src={evolution} alt="evolution" width="400px"/>
-              <Image src={eevee} alt="eevee" width="400px"/>
+              <Image src={evolution} alt="evolution" width="500px"/>
+              <Image src={eevee} alt="eevee" width="500px"/>
             </div>
           </div>
         </div>
@@ -122,6 +122,7 @@ export default class Container extends Component {
               <span>Charizard is a draconic, bipedal Pokémon. It is primarily orange with a cream underside from the chest to the tip of its tail. It has a long neck, small blue eyes, slightly raised nostrils, and two horn-like structures protruding from the back of its rectangular head. There are two fangs visible in its upper jaw when its mouth is closed. Two large wings with blue-green undersides sprout from its back, and a horn-like appendage juts out from the top of the third joint of each wing. A single wing-finger is visible through the center of each wing membrane. Charizard's arms are short and skinny compared to its robust belly, and each limb has three white claws. It has stocky legs with cream-colored soles on each of its plantigrade feet. The tip of its long, tapering tail burns with a sizable flame.</span>
               <br />
               <span>However, it's not a Dragon type Pokémon. Though not offcially a dragon, it still has a close relationship with dragon type Pokemons. For example, it can master the move "Dragon Tail", which is considered to be the distinctive move of Dragon type Pokemons.</span>
+              <span> If you search for Charizard, flying type, dragon type, you may suprisingly find that Charizard is a lot more closer to dragon type than flying type.</span>
             </div>
             <div className='img'>
               <Image src="https://archives.bulbagarden.net/media/upload/6/65/Mega_Charizard_X_Mega_Charizard_Y_artwork.png" alt="charizard" width="360px"/>

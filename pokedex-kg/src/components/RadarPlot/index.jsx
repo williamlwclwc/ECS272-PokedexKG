@@ -57,7 +57,7 @@ export default function RadarPlot(props) {
     },
     area: {},
     };
-    console.log("@")
+
     return (
         <Radar {...config} />
     )

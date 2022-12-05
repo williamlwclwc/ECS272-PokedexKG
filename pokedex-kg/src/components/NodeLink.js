@@ -139,6 +139,7 @@ function NodeLink() {
                     setSelectedItem(d);
                 }
             });
+            simulationUpdate();
         })
 
         let minTotalStats = 720;
@@ -429,8 +430,6 @@ function NodeLink() {
     window.onresize = function () {
         const contentWidth = document.getElementById('main').clientWidth - 50;
         const contentHeight = document.getElementById('main').clientHeight - 50;
-        console.log(contentHeight)
-        console.log(contentWidth)
         d3.select('#node-link').select('canvas').remove();
         drawDiagramCanvas('#node-link', data, contentHeight, contentWidth);
     }
