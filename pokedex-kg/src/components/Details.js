@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { selectedItemContext } from "./MainBoard";
 import { Empty } from "antd";
+import Banner from './Banner';
 
 function Details() {
     // eslint-disable-next-line
@@ -9,14 +10,13 @@ function Details() {
     if (Object.keys(selectedItem).length === 0)
         return (
             <Empty description={
-                <span>Select a Node or Link to see details</span>
+                <span>Select a Node to see details</span>
             } />
         );
     else {
+        // console.log(selectedItem);
         return (
-            <div> 
-                <span>{JSON.stringify(selectedItem)}</span>
-            </div>
+            <Banner {...selectedItem}/>
         );
     }
 }

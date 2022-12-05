@@ -1,0 +1,42 @@
+.slides {
+    background-color: #eeeeee;  
+    height: 85vh;
+}
+
+.page {
+    height: 80vh;
+}
+
+.pagetitle {
+    font-family: "comic sans MS";
+    font-size: 40px;
+    color: gold;
+    -webkit-text-stroke: 2px DarkSlateBlue;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    width: 100%;
+    display: block;
+    font-weight: bolder;
+}
+
+.pagecontent {
+    display: inline-flex;
+    flex-direction: row;
+    max-height: 75%;
+}
+
+.pagetext{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 16px;
+    text-align: left;
+    line-height: 24px;
+    padding-left: 32px;
+    padding-right: 32px;
+    color: black;
+}
+
+.img {
+    width: 500px;
+    height:100%;
+}
